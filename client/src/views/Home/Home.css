@@ -1,0 +1,15 @@
+.product-card{
+    border: 2px solid black;
+    padding: 10px;
+    width: 350px;
+   margin: 10px;
+    height: 550px;
+    
+}
+.main-container{
+    display: inline-flex;
+   flex-wrap: wrap;
+   margin-left: 80px;
+
+
+}
