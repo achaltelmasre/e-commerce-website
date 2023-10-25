@@ -88,10 +88,10 @@ app.post('/product', async (req, res) =>{
 });
  
 //Find Get request
-app.get('/product', async (req, res) => {
-    const {name} = req.query;
+app.get('/product/:_id', async (req, res) => {
+    const { _id } = req.params;
     
-    const product = await Product.findOne({name:name});
+    const product = await Product.findById( _id );
  
     res.json({
      success:true,

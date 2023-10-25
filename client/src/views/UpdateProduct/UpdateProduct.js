@@ -1,43 +1,49 @@
-import React, {useState} from 'react'
-import "./AddProduct.css"
 import axios from 'axios'
+import React, {useEffect, useState} from 'react'
+import "./UpdateProduct.css"
+import { useParams} from 'react-router-dom';
 
-function AddProduct() {
+function UpdateProduct() {
+
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [productimg, setProductimg] = useState('');
   const [brand, setBrand] = useState('');
 
+  const { _id } = useParams();
 
-  const addProduct = async () => {
-    if(!name || !description || !price || !productimg || !brand) {
-      alert('Please enter all fields')
-      return
-    }
+  const loadProduct = async () => {
+    const response = await axios.get(`/product/${_id}`)
 
-    const product = {
-      name,
-      description,
-      price,
-      productimg,
-      brand
-    }
-
-    const response = await axios.post('/product', product);
-
-    alert(response.data.message)
-
-    setName('')
-    setDescription('')
-    setPrice('')
-    setProductimg('')
-    setBrand('')
+    const {name, description, price, productimg, brand} = response?.data?.data
+    setName(name)
+    setDescription(description)
+    setPrice(price)
+    setProductimg(productimg)
+    setBrand(brand)
   }
 
+  useEffect(() =>{
+    loadProduct()
+  }, [])
+ 
+   const UpdateProduct = async () =>{
+     
+    const updatedDetails = {
+        name,
+        description,
+        price,
+        productimg,
+        brand
+      }
+      const response = await axios.put(`/product/${_id}`, updatedDetails);
+    alert(response?.data?.message)
+
+   }
   return (
     <div className='back'>
-      <h1 className='text-center'>Add Products</h1>
+      <h1 className='text-center'>Update Products</h1>
 
       <form className='form-container'>
 
@@ -84,13 +90,13 @@ function AddProduct() {
         <button
           type='button'
           className='form-btn'
-          onClick={addProduct}
+          onClick={UpdateProduct}
           >
-            Add Product
+            update Product
           </button>
       </form>
     </div>
   )
 }
 
-export default AddProduct
+export default UpdateProduct

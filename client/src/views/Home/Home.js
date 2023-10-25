@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import "./Home.css"
 
+
 function Home() {
   const [products, setProducts] = useState([])
 
@@ -9,6 +10,14 @@ function Home() {
     const response = await axios.get("/products")
     setProducts(response?.data?.data)
   }
+
+const deleteProduct = async (_id) => {
+  const response = await axios.delete(`/product/${_id}`)
+  if (response?.data?.success) {
+    loadProduct();
+  }
+
+} 
 
   useEffect(()=>{
     loadProduct();
@@ -20,7 +29,7 @@ function Home() {
 
       {
          products?.map((product, index) => {
-          const {name, description, price, productimg,brand} = product
+          const {_id,name, description, price, productimg,brand} = product
 
           return (
             <div className='main-container'>
@@ -31,9 +40,12 @@ function Home() {
               <p>{description}</p>
               <h4>{price}</h4>
               <p>{brand}</p>
-           </div>
+              <a href={`productdetail/${_id}`} target='blank'> View Details</a>
+              <button onClick={() => {deleteProduct(_id)}}>✖️</button>
+              <a href={`updateProduct/${_id}`} target='_blank'> ✏️</a>
 
            </div>
+        </div>
           )
         })
       }
