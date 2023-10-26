@@ -16,7 +16,6 @@ const deleteProduct = async (_id) => {
   if (response?.data?.success) {
     loadProduct();
   }
-
 } 
 
   useEffect(()=>{
@@ -25,7 +24,7 @@ const deleteProduct = async (_id) => {
 
   return (
     <div>
-      <h1 className='text-center'>All Products</h1>
+      <h1 className='text-center'>Dewali Products</h1>
 
       {
          products?.map((product, index) => {
@@ -38,11 +37,12 @@ const deleteProduct = async (_id) => {
                <img src={productimg} height={350} alt='product-img'/>
               <h3>{name} </h3>
               <p>{description}</p>
-              <h4>{price}</h4>
-              <p>{brand}</p>
+              <span>Brand : {brand} </span>
+             <h3>Price :{price} </h3>
+             
               <a href={`productdetail/${_id}`} target='blank'> View Details</a>
-              <button onClick={() => {deleteProduct(_id)}}>✖️</button>
-              <a href={`updateProduct/${_id}`} target='_blank'> ✏️</a>
+              <button onClick={() => {deleteProduct(_id)}} className='deletebtn'>✖️</button>
+              <a href={`updateProduct/${_id}`} target='_blank' className='updatebtn'> ✏️</a>
 
            </div>
         </div>

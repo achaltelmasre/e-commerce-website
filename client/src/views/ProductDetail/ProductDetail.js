@@ -19,12 +19,16 @@ function ProductDetail(){
 
      return(
         <>
-        <h1>Add productdetails</h1>
+        <h1 className="text-center">Add productdetails</h1>
+        <div className="detail">
         <h2>Product id : {_id}</h2>
-        <h4>Name : {Product.name}</h4>
-        <p>Description : {Product.description}</p>
-        <img src={ Product.productimg} height={250} />
-        <h5>Price : {Product.price}</h5>
+        <h1>Name : {Product.name}</h1>
+        <p className="prod-description">Description : {Product.description}</p>
+        <p className="prod-price">Price :{Product.price} </p>
+      
+        <img src={ Product.productimg} height={400} />
+ 
+        </div>
         </>
     )
 }

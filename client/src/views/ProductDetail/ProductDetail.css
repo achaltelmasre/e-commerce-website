@@ -1,0 +1,15 @@
+.detail{
+    padding-left: 60px;
+    margin-left: 50px;
+}
+.prod-description{
+    font-size: 20px;
+    padding-left: 40px;
+    padding-right: 50px;
+}
+.prod-price{
+    font-size: 30px;
+    color: red;
+    font-weight: bold;
+    
+}
